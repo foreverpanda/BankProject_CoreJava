@@ -13,9 +13,10 @@ public class BankAccount {
 	private String phoneNumber;
 	private LocalDate dateOfBirth;
 	private AccountType accType;
+	private int password;
 
 	public BankAccount(int accountNumber, double balance, String customerName, String phoneNumber, String email,
-			String dateOfBirth, AccountType accType) {
+			String dateOfBirth, AccountType accType, int password) {
 		super();
 		this.accountNumber = accountNumber;
 		this.balance = balance;
@@ -24,12 +25,12 @@ public class BankAccount {
 		this.email = email;
 		this.dateOfBirth = LocalDate.parse(dateOfBirth);
 		this.accType = accType;
+		this.password = 1234;
 		
 	}
 
 	public BankAccount(int accountNumber) {
 		super();
-		System.out.println("Dummy account created");
 		this.accountNumber = accountNumber;
 		this.balance = 0;
 		this.customerName = null;
@@ -46,9 +47,8 @@ public class BankAccount {
 	}
 
 	public double deposit(double amount) throws MinimumDepositAmountException {
-		if (amount < 500) {
+		if (amount > 500) {
 			this.balance += amount;
-			System.out.println("Amount deposited Successfully");
 			return balance;
 		} else {
 			throw new MinimumDepositAmountException("Minumum Deposit amount is 500 !");
@@ -56,11 +56,10 @@ public class BankAccount {
 
 	}
 
-	public void withdraw(double amount) throws InsufficientBalanceException {
+	public double withdraw(double amount) throws InsufficientBalanceException {
 		if (amount >= 0 && amount <= balance) {
 			balance = balance - amount;
-			System.out.println("Withdrawal successfull ");
-			System.out.println("Remaining Balance : " + balance);
+			return balance;
 
 		} else {
 			throw new InsufficientBalanceException("Insufficient Balance !!");

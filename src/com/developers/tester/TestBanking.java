@@ -13,15 +13,84 @@ public class TestBanking {
 		boolean exit = false;
 		try (Scanner sc = new Scanner(System.in)) {
 			while (!exit) {
-				System.out.println("Menu\n1. Open Account\n0.Exit");
+				try {
+					System.out.println("Menu\n1. Open Account\n2. Display Account Summary\n3. Deposit \n4. Withdraw\n5. Display All users\n6. Transfer amount\n0.Exit");
 
-				switch (sc.nextInt()) {
-				case 1:
-					service.openAccount(sc.nextInt(), sc.nextDouble(), sc.next(), sc.next(), sc.next(), sc.next(),
-							sc.next());
+					switch (sc.nextInt()) {
+					case 1:
+						System.out.println("Enter Account Number :");
+						int accountNumber = sc.nextInt();
+
+						System.out.println("Enter Opening Balance :");
+						double openingBalance = sc.nextDouble();
+						sc.nextLine(); // consume newline
+
+						System.out.println("Enter Customer Name :");
+						String customerName = sc.nextLine();
+
+						System.out.println("Enter Phone Number :");
+						String phoneNumber = sc.nextLine();
+
+						System.out.println("Enter Email :");
+						String email = sc.nextLine();
+
+						System.out.println("Enter Date of Birth :");
+						String dateOfBirth = sc.nextLine();
+
+						System.out.println("Enter Account Type :");
+						String accountType = sc.nextLine();
+
+//						System.out.println("Enter pass");
+						service.openAccount(accountNumber, openingBalance, customerName, phoneNumber, email,
+								dateOfBirth, accountType);
+						break;
+					case 2:
+						System.out.println("Enter Account Number :");
+						accountNumber = sc.nextInt();
+						sc.nextLine();
+						service.displayAccountSummary(accountNumber);
+						break;
+						
+					case 3:
+						System.out.println("Enter Account Number : ");
+						accountNumber = sc.nextInt();
+						System.out.println("Enter amount to Deposit : ");
+						double amount = sc.nextDouble();
+						sc.nextLine();
+						service.deposit(accountNumber,amount);
+						break;
+						
+					case 4:
+						System.out.println("Enter Account Number : ");
+						accountNumber = sc.nextInt();
+						System.out.println("Enter amount to withdraw : ");
+						 amount = sc.nextDouble();
+						sc.nextLine();
+						service.withdraw(accountNumber,amount);
+						break;
+					case 5:
+						service.displayAllUsers();break;
+						
+					case 6:
+						System.out.println("Enter Source Account Number : ");
+						int sourceAccountNumber = sc.nextInt();
+						System.out.println("Enter Destination Account Number : ");
+						int destinationAccountNumber = sc.nextInt();
+						System.out.println("Enter Transfer amount : ");
+						amount = sc.nextDouble();
+						System.out.println("Enter Transaction password :(Default : 1234) ");
+						int password = sc.nextInt();
+						service.transferFunds(sourceAccountNumber, destinationAccountNumber,amount, password);
+						
+						
 					break;
-				case 0:
-					exit = true;
+						
+					case 0:
+						exit = true;
+					}
+				} catch (Exception e) {
+					sc.nextLine();
+					System.out.println(e);
 				}
 			}
 
