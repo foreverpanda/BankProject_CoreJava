@@ -17,9 +17,8 @@ public interface AccountsService {
 //	String accountNumber, double balance, String customerName, String phoneNumber, String email, String dateOfBirth
 
 	public void transferFunds(int sourceAccountNumber, int destAccountNumber,double amount,int password)throws InvalidAccountNumberException,InsufficientBalanceException,MinimumDepositAmountException;
-	public void closeAccount() throws InvalidAccountNumberException;
-	public void applyInterest() throws InvalidAccountNumberException;
-	public void deleteAccounts() throws InvalidAccountNumberException ;
+	public void closeAccount(int accountNumber) throws InvalidAccountNumberException;
+	public void applyInterest(double interest) throws InvalidAccountNumberException;
 	public void displayAccountSummary(int accountNumber) throws InvalidAccountNumberException;
 	public void deposit(int accountNumber,double amount) throws InvalidAccountNumberException, MinimumDepositAmountException;
 	public void withdraw(int accountNumber,double amount) throws InvalidAccountNumberException,InsufficientBalanceException, BankingException;

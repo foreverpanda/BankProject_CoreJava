@@ -2,7 +2,7 @@ package com.developers.Accounts;
 
 
 public class SavingAccount extends BankAccount {
-	private double interestRate = 5;
+//	private double interestRate = 5;
 
 	public SavingAccount(int accountNumber, double balance, String customerName, String phoneNumber, String email,
 			String date, AccountType accType,int password) {
@@ -19,7 +19,7 @@ public class SavingAccount extends BankAccount {
 		this.email = email;
 	}
 
-	public void applyInterest() {
+	public void applyInterest(double interestRate) {
 		double balance = getBalance();
 		balance = balance + (balance * interestRate / 100);
 		setBalance(balance);

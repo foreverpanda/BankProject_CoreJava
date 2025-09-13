@@ -44,6 +44,7 @@ public class BankAccount {
 	}
 
 	protected void setBalance(double amount) {
+		this.balance = amount;
 	}
 
 	public double deposit(double amount) throws MinimumDepositAmountException {
@@ -66,6 +67,9 @@ public class BankAccount {
 		}
 	}
 
+	public AccountType getAccountType() {
+		return accType;
+	}
 	public int getAccountNumber() {
 		return accountNumber;
 	}

@@ -14,7 +14,7 @@ public class TestBanking {
 		try (Scanner sc = new Scanner(System.in)) {
 			while (!exit) {
 				try {
-					System.out.println("Menu\n1. Open Account\n2. Display Account Summary\n3. Deposit \n4. Withdraw\n5. Display All users\n6. Transfer amount\n0.Exit");
+					System.out.println("Menu\n1. Open Account\n2. Display Account Summary\n3. Deposit \n4. Withdraw\n5. Display All users\n6. Transfer amount\n7. Apply interest to all Saving Accounts\n0.Exit");
 
 					switch (sc.nextInt()) {
 					case 1:
@@ -84,6 +84,13 @@ public class TestBanking {
 						
 						
 					break;
+					case 7:
+						System.out.println("Enter Interest Rate : ");
+						double interestRate = sc.nextDouble();
+						service.applyInterest(interestRate);
+						break;
+					
+						
 						
 					case 0:
 						exit = true;

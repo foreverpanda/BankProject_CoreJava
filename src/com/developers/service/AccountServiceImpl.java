@@ -153,21 +153,37 @@ public class AccountServiceImpl implements AccountsService {
 	}
 
 	@Override
-	public void closeAccount() {
-		// TODO Auto-generated method stub
-
+	public void closeAccount(int accountNumber)throws InvalidAccountNumberException {
+		BankAccount dummy = new BankAccount(accountNumber);
+		int index = bankAccounts.indexOf(dummy);
+		if(index == -1)
+			throw new InvalidAccountNumberException("Invalid Account number ");
+		BankAccount ref = bankAccounts.get(index);
+		
+		bankAccounts.remove(ref);
+		System.out.println("Account Deleted Successfully");
+		
+		
+		
+		
 	}
 
 	@Override
-	public void applyInterest() {
-		// TODO Auto-generated method stub
+	public void applyInterest(double interest) {
+		AccountType accType = AccountType.valueOf("SAVING");
+		for(BankAccount i : bankAccounts)
+		{
+			if(i.getAccountType().equals(accType)) {
+				System.out.println("ASppls");
+
+				((SavingAccount)i).applyInterest(interest);
+			}
+			
+		}
+		System.out.println("Interest of "+interest+" applied on all the SAVING accounts");
+		
 
 	}
 
-	@Override
-	public void deleteAccounts() {
-		// TODO Auto-generated method stub
-
-	}
 
 }
