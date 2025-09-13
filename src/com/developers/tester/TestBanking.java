@@ -2,6 +2,7 @@ package com.developers.tester;
 
 import java.util.Scanner;
 
+import com.developers.Accounts.AccountType;
 import com.developers.service.AccountServiceImpl;
 import com.developers.validation.BankingValidations;
 
@@ -90,7 +91,17 @@ public class TestBanking {
 						service.applyInterest(interestRate);
 						break;
 					
+					case 8:
+//						7. Display phone numbers for customers with specified account type , having balance > specific value.
+//						i/p - account type , min balance .
+						System.out.println("Enter Account Type : ");
+						String accType = sc.next();
+						sc.nextLine();
+						System.out.println("Enter Minimun Balance : ");
+						amount = sc.nextDouble();
 						
+						service.filterAccounts(AccountType.valueOf(accType),amount);
+						break;
 						
 					case 0:
 						exit = true;

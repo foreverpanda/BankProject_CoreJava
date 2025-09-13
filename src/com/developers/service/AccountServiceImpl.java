@@ -185,5 +185,21 @@ public class AccountServiceImpl implements AccountsService {
 
 	}
 
+	public void filterAccounts(AccountType accType, double amount) {
+		for(BankAccount i : bankAccounts)
+		{
+			if((i.getAccountType().equals(accType)) && (i.getBalance() > amount )) {
+				System.out.println(i);
+
+//				((SavingAccount)i).applyInterest(interest);
+			}
+			
+		}
+//		System.out.println("Interest/ of "+interest+" applied on all the SAVING accounts");
+		
+
+		
+	}
+
 
 }
