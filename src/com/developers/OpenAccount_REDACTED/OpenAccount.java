@@ -1,4 +1,4 @@
-package com.developers.OpenAccount;
+package com.developers.OpenAccount_REDACTED;
 
 import java.util.Scanner;
 

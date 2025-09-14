@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 import com.developers.Accounts.AccountType;
 import com.developers.service.AccountServiceImpl;
-import com.developers.validation.BankingValidations;
 
 public class TestBanking {
 
@@ -15,7 +14,8 @@ public class TestBanking {
 		try (Scanner sc = new Scanner(System.in)) {
 			while (!exit) {
 				try {
-					System.out.println("Menu\n1. Open Account\n2. Display Account Summary\n3. Deposit \n4. Withdraw\n5. Display All users\n6. Transfer amount\n7. Apply interest to all Saving Accounts\n0.Exit");
+					System.out.println(
+							"Menu\n1. Open Account\n2. Display Account Summary\n3. Deposit \n4. Withdraw\n5. Display All users\n6. Transfer amount\n7. Apply interest to all Saving Accounts\n8. Apply filter\n9. Delete ALL Current Acocounts\n0.Exit");
 
 					switch (sc.nextInt()) {
 					case 1:
@@ -51,27 +51,29 @@ public class TestBanking {
 						sc.nextLine();
 						service.displayAccountSummary(accountNumber);
 						break;
-						
+
 					case 3:
 						System.out.println("Enter Account Number : ");
 						accountNumber = sc.nextInt();
 						System.out.println("Enter amount to Deposit : ");
 						double amount = sc.nextDouble();
 						sc.nextLine();
-						service.deposit(accountNumber,amount);
+						service.deposit(accountNumber, amount);
 						break;
-						
+
 					case 4:
 						System.out.println("Enter Account Number : ");
 						accountNumber = sc.nextInt();
 						System.out.println("Enter amount to withdraw : ");
-						 amount = sc.nextDouble();
+						amount = sc.nextDouble();
 						sc.nextLine();
-						service.withdraw(accountNumber,amount);
+						service.withdraw(accountNumber, amount);
 						break;
-					case 5:
-						service.displayAllUsers();break;
 						
+					case 5:
+						service.displayAllUsers();
+						break;
+
 					case 6:
 						System.out.println("Enter Source Account Number : ");
 						int sourceAccountNumber = sc.nextInt();
@@ -81,28 +83,39 @@ public class TestBanking {
 						amount = sc.nextDouble();
 						System.out.println("Enter Transaction password :(Default : 1234) ");
 						int password = sc.nextInt();
-						service.transferFunds(sourceAccountNumber, destinationAccountNumber,amount, password);
+						service.transferFunds(sourceAccountNumber, destinationAccountNumber, amount, password);
+						break;
 						
-						
-					break;
 					case 7:
 						System.out.println("Enter Interest Rate : ");
 						double interestRate = sc.nextDouble();
 						service.applyInterest(interestRate);
 						break;
-					
+
 					case 8:
-//						7. Display phone numbers for customers with specified account type , having balance > specific value.
-//						i/p - account type , min balance .
+
 						System.out.println("Enter Account Type : ");
 						String accType = sc.next();
 						sc.nextLine();
 						System.out.println("Enter Minimun Balance : ");
 						amount = sc.nextDouble();
-						
-						service.filterAccounts(AccountType.valueOf(accType),amount);
+						service.filterAccounts(AccountType.valueOf(accType.toUpperCase()), amount);
 						break;
 						
+					case 9:
+
+						System.out.println("Warning ! This will DELETE all the CURRENT ACCOUNTS");
+						System.out.println("Press 1 to continue \nPress 2 to Abort!");
+						int option = sc.nextInt();
+						if (option == 1) {
+							service.deleteAllCurrentAccounts();
+						}
+						break;
+						
+					case 10:
+						//display accounts in sorted order
+						service.sortAndDisplayUsers();
+					
 					case 0:
 						exit = true;
 					}

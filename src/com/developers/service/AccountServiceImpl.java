@@ -1,6 +1,8 @@
 package com.developers.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import com.developers.Accounts.AccountType;
 import com.developers.Accounts.BankAccount;
@@ -22,7 +24,7 @@ public class AccountServiceImpl implements AccountsService {
 //	public String email ;
 //	String dateOfBirth;
 //	String accountType;
-	ArrayList<BankAccount> bankAccounts;
+	List<BankAccount> bankAccounts;
 
 	public AccountServiceImpl() {
 		bankAccounts = new ArrayList<>();
@@ -32,16 +34,16 @@ public class AccountServiceImpl implements AccountsService {
 		BankAccount acc4 = new CurrentAccount(104, 50000.0, "Neha Gupta", "9012345678", "neha.gupta@gmail.com", "1990-07-11", AccountType.CURRENT,6000,1111);
 		BankAccount acc5 = new SavingAccount(105, 30000.0, "Karan Mehta", "9765432101", "karan.mehta@gmail.com", "1993-11-19", AccountType.SAVING,1111);
 		BankAccount acc6 = new CurrentAccount(106, 12000.0, "Sanya Kapoor", "9456123780", "sanya.kapoor@gmail.com", "1991-04-28", AccountType.CURRENT,6000,1111);
-//		BankAccount acc7 = new SavingAccount(107, 18000.0, "Vikram Singh", "9871234567", "vikram.singh@gmail.com", "1987-09-03", AccountType.SAVING,1111);
-//		BankAccount acc8 = new CurrentAccount(108, 40000.0, "Ritika Joshi", "9023456789", "ritika.joshi@gmail.com", "1994-06-17", AccountType.CURRENT,6000,1111);
-		bankAccounts.add(acc1);
+		BankAccount acc7 = new SavingAccount(107, 18000.0, "Vikram Singh", "9871234567", "vikram.singh@gmail.com", "1987-09-03", AccountType.SAVING,1111);
+		BankAccount acc8 = new CurrentAccount(108, 40000.0, "Ritika Joshi", "9023456789", "ritika.joshi@gmail.com", "1994-06-17", AccountType.CURRENT,6000,1111);
 		bankAccounts.add(acc2);
-		bankAccounts.add(acc3);
+		bankAccounts.add(acc1);
+		bankAccounts.add(acc8);
 		bankAccounts.add(acc4);
-		bankAccounts.add(acc5);
+		bankAccounts.add(acc7);
+		bankAccounts.add(acc3);
 		bankAccounts.add(acc6);
-//		bankAccounts.add(acc7);
-//		bankAccounts.add(acc8);
+		bankAccounts.add(acc5);
 		
 	}
 
@@ -148,8 +150,6 @@ public class AccountServiceImpl implements AccountsService {
 		withdraw(sourceAccountNumber,amount);
 		deposit(destAccountNumber,amount);
 		System.out.println("Transfer Successful");
-		
-
 	}
 
 	@Override
@@ -159,13 +159,8 @@ public class AccountServiceImpl implements AccountsService {
 		if(index == -1)
 			throw new InvalidAccountNumberException("Invalid Account number ");
 		BankAccount ref = bankAccounts.get(index);
-		
 		bankAccounts.remove(ref);
 		System.out.println("Account Deleted Successfully");
-		
-		
-		
-		
 	}
 
 	@Override
@@ -178,11 +173,8 @@ public class AccountServiceImpl implements AccountsService {
 
 				((SavingAccount)i).applyInterest(interest);
 			}
-			
 		}
 		System.out.println("Interest of "+interest+" applied on all the SAVING accounts");
-		
-
 	}
 
 	public void filterAccounts(AccountType accType, double amount) {
@@ -190,16 +182,25 @@ public class AccountServiceImpl implements AccountsService {
 		{
 			if((i.getAccountType().equals(accType)) && (i.getBalance() > amount )) {
 				System.out.println(i);
-
-//				((SavingAccount)i).applyInterest(interest);
 			}
-			
 		}
-//		System.out.println("Interest/ of "+interest+" applied on all the SAVING accounts");
-		
-
-		
 	}
-
-
+	
+	@Override
+	public void deleteAllCurrentAccounts(){
+		List<BankAccount>currentAccounts = new ArrayList<BankAccount>();
+		for(BankAccount i : bankAccounts) {
+			if(i.getAccountType() == AccountType.valueOf("CURRENT")) {
+				currentAccounts.add(i)	;
+			}
+		}
+		bankAccounts.removeAll(currentAccounts);
+		System.out.println("Current Accounts Deleted Successfully");
+	}
+	@Override
+	public void sortAndDisplayUsers() {
+		Collections.sort(bankAccounts);
+		displayAllUsers();
+	}
+	
 }

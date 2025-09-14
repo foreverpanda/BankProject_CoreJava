@@ -1,6 +1,7 @@
 package com.developers.validation;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.developers.Accounts.AccountType;
 import com.developers.Accounts.BankAccount;
@@ -10,7 +11,7 @@ import com.developers.customException.InvalidEmailException;
 
 public class BankingValidations {
 
-	public static void checkForDup(int accountNumber,ArrayList<BankAccount> bankAccounts) throws DuplicateAccountException, BankingException {
+	public static void checkForDup(int accountNumber,List<BankAccount> bankAccounts) throws DuplicateAccountException, BankingException {
 		BankAccount dummyAccount = new BankAccount(accountNumber);
 		if(bankAccounts.contains(dummyAccount)) {
 			throw new DuplicateAccountException("Account Number already Exists !!");

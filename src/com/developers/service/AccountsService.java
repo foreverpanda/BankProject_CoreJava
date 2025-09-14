@@ -24,5 +24,9 @@ public interface AccountsService {
 	public void withdraw(int accountNumber,double amount) throws InvalidAccountNumberException,InsufficientBalanceException, BankingException;
 
 	void displayAllUsers();
+
+	void deleteAllCurrentAccounts();
+
+	void sortAndDisplayUsers();
 }
 

@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import com.developers.customException.InsufficientBalanceException;
 import com.developers.customException.MinimumDepositAmountException;
 
-public class BankAccount {
+public class BankAccount implements Comparable<BankAccount> {
 	public int accountNumber;
 	public double balance;
 	private String customerName;
@@ -85,6 +85,12 @@ public class BankAccount {
 			return true;
 
 		return false;
+	}
+
+	@Override
+	public int compareTo(BankAccount o) {
+		return String.valueOf(accountNumber).compareTo(String.valueOf(o.getAccountNumber()));
+		
 	}
 
 }
